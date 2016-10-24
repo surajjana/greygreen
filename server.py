@@ -39,6 +39,12 @@ def images(filename):
 def fonts(filename):
     return static_file(filename, root='static/fonts')
 
+@app.hook('after_request')
+def enable_cors():
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, OPTIONS'
+	response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
+
 @app.route('/add_data')
 def add_data():
 	return template('templates/add_data.tpl')
@@ -52,3 +58,7 @@ def add_data_post():
 	cur = db.greygreen.insert_one({"r_id": r_id, "time": r_time, "rating": rating})
 
 	return '{"status": "OK"}'
+
+@app.route('/data')
+def data():
+	return template('templates/index.tpl')
