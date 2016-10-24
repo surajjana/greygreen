@@ -136,3 +136,17 @@ def json_data():
 			res[20]['y'].append(data[i]['rating'])
 
 	return json.dumps(res)
+
+@app.route('/json')
+def json_test():
+	cur = db.greygreen.find()
+	data = json.loads(dumps(cur))
+
+	#res = [{'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 0'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 1'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 2'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 3'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 4'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 5'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 6'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 7'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 8'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 9'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 10'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 11'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 12'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 13'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 14'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 15'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 16'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 17'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 18'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 19'}, {'x': [], 'y': [], 'type': 'scatter', 'name': 'Restaurant 20'}]
+	res = [{'label': 'Restaurant 1','strokeColor': '#A31515','data': []}]
+
+	for i in range(0, len(data)):
+		if(data[i]['r_id'] == 1):
+			res[0]['data'].append({'x': data[i]['time'], 'y': data[i]['rating']})
+
+	return json.dumps(res)
