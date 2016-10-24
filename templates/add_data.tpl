@@ -47,7 +47,7 @@
 			var data = $('#test').serializeFormJSON();
 
 			
-    		$.post('http://localhost:8000/add_data', data, function(data){
+    		$.post('http://52.34.226.223:8000/add_data', data, function(data){
 
             	console.log(data)
             	var data = JSON.parse(data)
