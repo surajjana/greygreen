@@ -55,7 +55,7 @@ def add_data_post():
 	r_time = request.forms.get('r_time')
 	rating = request.forms.get('rating')
 
-	cur = db.greygreen.insert_one({"r_id": int(r_id), "time": r_time, "rating": int(rating)})
+	cur = db.greygreen.insert_one({"r_id": int(r_id), "time": r_time, "rating": rating})
 
 	return '{"status": "OK"}'
 
