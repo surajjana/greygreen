@@ -20,7 +20,9 @@
 
     $(document).ready(function () {
 
-      $.getJSON('http://127.0.0.1:8000/json_data', function(jd){
+      $("#show").click(function(){
+        console.log('Show clicked...');
+        $.getJSON('http://127.0.0.1:8000/json_data', function(jd){
 
         console.log(JSON.stringify(jd));
         
@@ -45,8 +47,13 @@
           scaleLabel: "<%=value%>"
         });
 
-      });      
+      });  
+
+      });
+
+          
     });
   </script>
+  <button id="show">Show Data</button>
 </body>
 </html>
