@@ -29,7 +29,7 @@
         var color = ['#cd6155','#9b59b6','#2980b9','#48c9b0','#16a085','#186a3b','#f4d03f','#b7950b','#ca6f1e','#ba4a00','#7b7d7d','#7f8c8d','#2e4053','#17202a','#1b4f72','#512e5f','#28b463','#e6b0aa','#239b56','#7d3c98']
 
         for (var i=0; i<jd.length; i++){
-          data3[i] = {'lable': jd[i].name, 'strokeColor': color[i], 'data':[]}
+          data3[i] = {'label': jd[i].name, 'strokeColor': color[i], 'data':[]}
           for (var j = 0; j < jd[i].x.length; j++){
             data3[i].data[j] = {'x': new Date(jd[i].x[j]), 'y': jd[i].y[j]}
           }
