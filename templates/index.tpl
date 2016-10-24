@@ -22,7 +22,7 @@
 
       $("#show").click(function(){
         console.log('Show clicked...');
-        $.getJSON('http://127.0.0.1:8000/json_data', function(jd){
+        $.getJSON('http://52.34.226.223:8000/json_data', function(jd){
 
         console.log(JSON.stringify(jd));
         
