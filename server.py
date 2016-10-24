@@ -55,10 +55,17 @@ def add_data_post():
 	r_time = request.forms.get('r_time')
 	rating = request.forms.get('rating')
 
-	cur = db.greygreen.insert_one({"r_id": r_id, "time": r_time, "rating": rating})
+	cur = db.greygreen.insert_one({"r_id": int(r_id), "time": r_time, "rating": rating})
 
 	return '{"status": "OK"}'
 
 @app.route('/data')
 def data():
 	return template('templates/index.tpl')
+
+@app.route('/json_data')
+def json_data():
+	cur = db.greygreen.find({"r_id": 0})
+	data = json.loads(dumps(cur))
+
+	return json.dumps(data)
