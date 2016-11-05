@@ -16,7 +16,7 @@ db = client.test
 
 @app.route('/')
 def root():
-	return 'Grey Green Restaurant Server Started'
+	return 'BL Python Server'
 	# res = {'data':{'x': ['2013-10-04 13:00:00', '2013-10-04 15:30:00', '2013-10-04 22:30:00'],'y': [1, 3, 4],'type': 'scatter','name': 'Restaurant 1'}}
 	# # res = {"res": res}
 	# #print type(res)
@@ -58,6 +58,17 @@ def add_data_post():
 	cur = db.greygreen.insert_one({"r_id": int(r_id), "time": r_time, "rating": rating})
 
 	return '{"status": "OK"}'
+
+@app.post('/heymedy_ping')
+def heymedy_ping():
+        name = request.forms.get('name')
+        email = request.forms.get('email')
+        phone = request.forms.get('phone')
+
+        cur = db.heymedy.insert_one({"name": name, "email": email, "phone": phone})
+
+        return '{"status": "OK"}'
+
 
 @app.route('/data')
 def data():
