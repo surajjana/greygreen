@@ -161,3 +161,40 @@ def json_test():
 			res[0]['data'].append({'x': data[i]['time'], 'y': data[i]['rating']})
 
 	return json.dumps(res)
+
+client_1 = MongoClient('mongodb://52.34.226.223:27017/krispypapad')
+db_1 = client_1.krispypapad
+
+@app.route('/articles')
+def read_all():
+    cur = db_1.articles.find()
+    return dumps(cur)
+
+@app.route('/articles/<id>')
+def read_by_id(id):
+    cur = db_1.articles.find({"id": int(id)})
+    return dumps(cur)
+
+@app.route('/update')
+def update_articles():
+    id_1 = request.forms.get('id')
+    title = request.forms.get('title')
+    content_1 = request.forms.get('content_1')
+    content_2 = request.forms.get('content_2')
+    author = request.forms.get('author')
+    powered_by = request.forms.get('powered_by')
+    source_name = request.forms.get('source_name')
+    image = request.forms.get('image')
+    original_link = request.forms.get('original_link')
+    likes = request.forms.get('likes')
+    shares = request.forms.get('shares')
+    tags = request.forms.get('tags')
+    status = request.forms.get('status')
+    time_stamp = time.time()
+
+    
+
+    cur = db_1.articles.update_one({"id": int(id_1)},{"$set": {"title": title, "content_1": content_1, "content_2": content_2, "author": author, "powered_by": powered_by, "source_name": source_name, "image": image, "originak_link":original_link, "likes": likes, "shares": shares, "tags": tags, "status": status, "time_stamp": time_stamp}})
+    #cur = db_1.articles.update({"id": int(id)},{"$set": {"title": title}})
+    #return json.dumps({'id': int(id), 'matched_count': cur.matched_count, 'modified_count': cur.modified_count})
+    return dumps(cur)
