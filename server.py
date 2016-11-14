@@ -71,7 +71,7 @@ def heymedy_ping():
 
 @app.route('/hosp_reg/<data>')
 def hosp_reg(data):
-	cur = db.merchant_hosp.insert_one(data)
+	cur = db.merchant_hosp.insert_one(json.loads(data))
 
 	return '{"status": "OK"}'
 
