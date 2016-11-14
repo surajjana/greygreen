@@ -69,6 +69,12 @@ def heymedy_ping():
 
         return '{"status": "OK"}'
 
+@app.route('/hosp_reg/<data>')
+def hosp_reg(data):
+	cur = db.merchant_hosp.insert_one(data)
+
+	return '{"status": "OK"}'
+
 
 @app.route('/data')
 def data():
