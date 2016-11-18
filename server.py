@@ -11,7 +11,8 @@ import os
 
 app = Bottle(__name__)
 
-client = MongoClient('mongodb://52.34.226.223:27017/test')
+#client = MongoClient('mongodb://52.34.226.223:27017/test')
+client = MongoClient()
 db = client.test
 
 @app.route('/')
@@ -71,9 +72,38 @@ def heymedy_ping():
 
 @app.route('/hosp_reg/<data>')
 def hosp_reg(data):
-	cur = db.merchant_hosp.insert_one(json.loads(data))
 
-	return '{"status": "OK"}'
+	try:
+		cur = db.merchant_hosp.insert_one(json.loads(data))
+	except:
+		return '{"status": "NA"}'
+	else:
+		return '{"status": "OK"}'
+
+@app.post('/upload_logo')
+def upload_logo():
+	data = request.files.data
+	print data
+	try:
+		if(data and data.file):
+			data.save('/home/suraj/Pictures/test.png',overwrite=True)
+	except:
+		return 'Failure'
+	else:
+		return 'Success'
+
+@app.post('/base64_img')
+def base64_img():
+	return request.forms.get('data')
+	# imgData = b"'"+data+"'"
+	# try:
+	# 	fh = open("img_data/"+filename, "wb")
+	# 	fh.write(imgData.decode('base64'))
+	# except:
+	# 	return '{"status": "Error"}'
+	# else:
+	# 	fh.close()
+	# 	return '{"status": "OK"}'
 
 
 @app.route('/data')
@@ -204,3 +234,16 @@ def update_articles():
     #cur = db_1.articles.update({"id": int(id)},{"$set": {"title": title}})
     #return json.dumps({'id': int(id), 'matched_count': cur.matched_count, 'modified_count': cur.modified_count})
     return dumps(cur)
+
+@app.post('/login_test')
+def login_check():
+	username = request.forms.get('uname')
+	pwd = request.forms.get('pwd')
+
+	print username
+	print pwd
+
+	if (username == 'admin' and pwd == 'admin'):
+		return json.dumps({'status': 'ok', 'username': username})
+	else:
+		return json.dumps({'status': 'error'})
